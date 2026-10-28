@@ -1,16 +1,17 @@
 backend:
   name: github
-  repo: EdsonMore/web_sinole # CAMBIAR: tu-usuario/nombre-del-repositorio
+  repo: EdsonMore/web_sinole
   branch: main
   base_url: https://websinole.vercel.app
   auth_endpoint: api/auth
+
+media_folder: "public/images/noticias" # Donde se guardan físicamente las fotos
+public_folder: "/images/noticias"      # La ruta pública que usa Astro para mostrarlas
 
 # Para editar en tu PC sin GitHub: ejecutar `npx decap-server` junto a `npm run dev`
 local_backend: true
 
 locale: es
-media_folder: public/images/noticias
-public_folder: /images/noticias
 
 collections:
   - name: noticias
