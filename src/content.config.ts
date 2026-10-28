@@ -7,8 +7,9 @@ const noticias = defineCollection({
   schema: z.object({
     titulo: z.string(),
     fecha: z.coerce.date(),
-    imagen: z.string().optional(),
+    imagenes: z.array(z.string()).nullish().transform((v) => v ?? []),
     resumen: z.string(),
+    enlaces_redes: z.array(z.string().url().startsWith('https://')).nullish().transform((v) => v ?? []),
     categoria: z.string().default('Comunicado'),
   }),
 });

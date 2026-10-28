@@ -2,7 +2,8 @@
 import type { CollectionEntry } from 'astro:content';
 interface Props { noticia: CollectionEntry<'noticias'> }
 const { noticia } = Astro.props;
-const { titulo, fecha, imagen, resumen, categoria } = noticia.data;
+const { titulo, fecha, imagenes, resumen, categoria } = noticia.data;
+const imagen = imagenes[0];
 const fechaTxt = fecha.toLocaleDateString('es-PE', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 ---
 <article class="revelar group flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm transition-shadow hover:shadow-lg">

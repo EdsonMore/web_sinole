@@ -1,7 +1,8 @@
 ---
 titulo: "Talara: trabajadores petroleros piden garantizar la operación plena de la refinería"
 fecha: 2026-10-20
-imagen: /images/noticias/talara.svg
+imagenes:
+  - /images/noticias/talara.svg
 resumen: "SINOLE y FEDUNPE respaldan a los trabajadores de Talara y llaman a proteger la mayor inversión energética del país."
 categoria: Talara
 ---

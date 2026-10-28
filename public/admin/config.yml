@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: USUARIO_GITHUB/web_sinole # CAMBIAR: tu-usuario/nombre-del-repositorio
+  repo: EdsonMore/web_sinole
   branch: main
   base_url: https://websinole.vercel.app
   auth_endpoint: api/auth
@@ -24,6 +24,18 @@ collections:
       - { label: Título, name: titulo, widget: string }
       - { label: Fecha, name: fecha, widget: datetime, date_format: DD/MM/YYYY, time_format: false, format: YYYY-MM-DD }
       - { label: Categoría, name: categoria, widget: select, options: [Comunicado, Petroperú, Talara, Oleoducto, FEDUNPE, Convocatoria], default: Comunicado }
-      - { label: Imagen de portada, name: imagen, widget: image, required: false }
+      - label: Imágenes (la primera es la portada)
+        name: imagenes
+        widget: list
+        required: false
+        default: []
+        field: { label: Imagen, name: imagen, widget: image }
       - { label: Resumen (1-2 líneas), name: resumen, widget: text }
+      - label: Enlaces a redes (Facebook, TikTok, Instagram)
+        name: enlaces_redes
+        widget: list
+        required: false
+        default: []
+        hint: Pega el enlace completo de la publicación, uno por ítem.
+        field: { label: Enlace, name: enlace, widget: string, pattern: ['^https://', 'Debe empezar con https://'] }
       - { label: Contenido, name: body, widget: markdown }

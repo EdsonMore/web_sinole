@@ -1,9 +1,13 @@
 ---
 titulo: "SINOLE reafirma su defensa de Petroperú como empresa estratégica del Estado"
 fecha: 2026-10-28
-imagen: /images/noticias/petroperu.svg
+imagenes:
+  - /images/noticias/petroperu.svg
 resumen: "Los trabajadores del Oleoducto exigen transparencia en las decisiones sobre los lotes petroleros y el futuro de la empresa."
 categoria: Petroperú
+enlaces_redes:
+  - https://www.tiktok.com/@sinole2025
+  - https://www.facebook.com/sindicato.oleoducto
 ---
 
 El **Sindicato de Trabajadores de Petróleos del Perú – Operaciones Oleoducto (SINOLE)** reafirma su compromiso con una Petroperú fuerte, integrada y al servicio de todos los peruanos.
