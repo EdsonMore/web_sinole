@@ -2,7 +2,7 @@
 titulo: 📌 5 demandas de Piura, cara a cara con el diputado Raúl Camargo, en el
   local de FEDUNPE–SINOLE.
 fecha: 2026-10-16
-fijada: true
+fijada: false
 categoria: Talara
 imagenes:
   - https://scontent.fgye15-1.fna.fbcdn.net/v/t39.30808-6/867530167_29193012220322347_3640711716297464545_n.jpg?stp=dst-jpg_tt6&cstp=mx960x1200&ctp=s960x1200&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_ohc=v6v0pF15lwEQ7kNvwGqZ_Mh&_nc_oc=AdrN0_ugaKhGU93jQZN9CajRLaq3yVNcZpR-mPXqjTBEBuv1Jnhz0IrLvs_am5ridNg&_nc_zt=23&_nc_ht=scontent.fgye15-1.fna&_nc_gid=9YRyOKLNeAbDSFBEl-3Gwg&_nc_ss=7b2a8&oh=00_AQTtRUDugopUvAMUkjw8NVEsJPHE8O4uFNTj73FpO1HxkA&oe=6AE806AD
