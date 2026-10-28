@@ -11,6 +11,7 @@ const noticias = defineCollection({
     resumen: z.string(),
     enlaces_redes: z.array(z.string().url().startsWith('https://')).nullish().transform((v) => v ?? []),
     categoria: z.string().default('Comunicado'),
+    fijada: z.boolean().default(false),
   }),
 });
 

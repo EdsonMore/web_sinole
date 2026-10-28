@@ -24,6 +24,7 @@ collections:
     fields:
       - { label: Título, name: titulo, widget: string }
       - { label: Fecha, name: fecha, widget: datetime, date_format: DD/MM/YYYY, time_format: false, format: YYYY-MM-DD }
+      - { label: "¿Fijar esta noticia en la portada?", name: fijada, widget: boolean, default: false, required: false }
       - { label: Categoría, name: categoria, widget: select, options: [Comunicado, Petroperú, Talara, Oleoducto, FEDUNPE, Convocatoria], default: Comunicado }
       - label: Imágenes (la primera es la portada)
         name: imagenes

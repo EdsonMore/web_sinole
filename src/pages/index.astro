@@ -6,7 +6,7 @@ import Icono from '../components/Icono.astro';
 import { SITE, SOCIAL } from '../site';
 
 const ultimas = (await getCollection('noticias'))
-  .sort((a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf())
+  .sort((a, b) => Number(b.data.fijada) - Number(a.data.fijada) || b.data.fecha.valueOf() - a.data.fecha.valueOf())
   .slice(0, 3);
 
 const pilares = [
@@ -75,7 +75,7 @@ const preguntas = [
         <a href="/noticias" class="font-semibold text-verde-700 hover:underline">Ver todas →</a>
       </div>
       <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {ultimas.map((n) => <TarjetaNoticia noticia={n} />)}
+        {ultimas.map((n) => <TarjetaNoticia noticia={n} destacada={n.data.fijada} />)}
       </div>
     </div>
   </section>

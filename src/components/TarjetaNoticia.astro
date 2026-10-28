@@ -1,20 +1,24 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-interface Props { noticia: CollectionEntry<'noticias'> }
-const { noticia } = Astro.props;
+interface Props { noticia: CollectionEntry<'noticias'>; destacada?: boolean }
+const { noticia, destacada = false } = Astro.props;
 const { titulo, fecha, imagenes, resumen, categoria } = noticia.data;
 const imagen = imagenes[0];
 const fechaTxt = fecha.toLocaleDateString('es-PE', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 ---
-<article class="revelar group flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm transition-shadow hover:shadow-lg">
-  <a href={`/noticias/${noticia.id}`} class="block aspect-[16/9] overflow-hidden bg-verde-50">
+<article class:list={[
+  'revelar group relative flex flex-col overflow-hidden rounded-xl border bg-white shadow-sm transition-shadow hover:shadow-lg',
+  destacada ? 'border-rojo-600 ring-2 ring-rojo-600 md:col-span-2 lg:row-span-2' : 'border-stone-200',
+]}>
+  {destacada && <span class="absolute left-3 top-3 z-10 rounded-full bg-rojo-600 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow">★ Destacado</span>}
+  <a href={`/noticias/${noticia.id}`} class:list={['block aspect-[16/9] overflow-hidden bg-verde-50', destacada && 'lg:aspect-auto lg:flex-1']}>
     {imagen
       ? <img src={imagen} alt="" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
       : <div class="grid h-full place-items-center"><img src="/logos/sinole.jpg" alt="" class="h-20 w-20 rounded-full opacity-70" /></div>}
   </a>
-  <div class="flex flex-1 flex-col p-5">
+  <div class:list={['flex flex-col p-5', !destacada && 'flex-1']}>
     <p class="text-xs font-semibold uppercase tracking-wider text-rojo-700">{categoria} · <time datetime={fecha.toISOString()}>{fechaTxt}</time></p>
-    <h3 class="mt-2 font-serif text-xl font-bold leading-snug text-stone-900">
+    <h3 class:list={['mt-2 font-serif font-bold leading-snug text-stone-900', destacada ? 'text-2xl md:text-3xl' : 'text-xl']}>
       <a href={`/noticias/${noticia.id}`} class="hover:text-verde-700">{titulo}</a>
     </h3>
     <p class="mt-2 flex-1 text-stone-600">{resumen}</p>
