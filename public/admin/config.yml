@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: EdsonMore/web_sinole
+  repo: EdsonMore/web_sinole # CAMBIAR: tu-usuario/nombre-del-repositorio
   branch: main
   base_url: https://websinole.vercel.app
   auth_endpoint: api/auth
