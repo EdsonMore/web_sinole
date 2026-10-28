@@ -2,7 +2,7 @@ backend:
   name: github
   repo: USUARIO_GITHUB/web_sinole # CAMBIAR: tu-usuario/nombre-del-repositorio
   branch: main
-  base_url: https://web-sinole.vercel.app # CAMBIAR: la URL de tu sitio en Vercel
+  base_url: https://websinole.vercel.app
   auth_endpoint: api/auth
 
 # Para editar en tu PC sin GitHub: ejecutar `npx decap-server` junto a `npm run dev`

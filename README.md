@@ -11,7 +11,7 @@ Astro + Tailwind CSS + Markdown + Decap CMS. Hosting gratis en Vercel.
 
 2. **Conéctalo a Vercel**
    Entra a <https://vercel.com> con tu cuenta de GitHub → **Add New… → Project** → elige `web_sinole` → **Deploy**.
-   Vercel detecta Astro solo. En 1 minuto tendrás tu web en `https://web-sinole.vercel.app` (o similar).
+   Vercel detecta Astro solo. En 1 minuto tendrás tu web en `https://websinole.vercel.app`.
 
 3. **Ajusta tus datos**
    En GitHub abre y edita (ícono del lápiz) estos archivos; cada cambio se publica solo:
@@ -39,14 +39,14 @@ Texto de la noticia. **Negritas**, listas, enlaces…
 **Opción B – panel visual en `/admin` (Decap CMS):** configuración única de ~5 minutos:
 
 1. GitHub → **Settings → Developer settings → OAuth Apps → New OAuth App**
-   - Homepage URL: `https://TU-SITIO.vercel.app`
-   - Authorization callback URL: `https://TU-SITIO.vercel.app/api/callback`
+   - Homepage URL: `https://websinole.vercel.app`
+   - Authorization callback URL: `https://websinole.vercel.app/api/callback`
    - Crea la app, copia el **Client ID** y genera un **Client Secret**.
 2. Vercel → tu proyecto → **Settings → Environment Variables**: agrega
    `GITHUB_CLIENT_ID` y `GITHUB_CLIENT_SECRET` → luego **Deployments → Redeploy**.
-3. En GitHub edita `public/admin/config.yml`: `repo: tu-usuario/web_sinole` y `base_url: https://TU-SITIO.vercel.app`.
+3. En GitHub edita `public/admin/config.yml`: `repo: tu-usuario/web_sinole` (la `base_url` ya está configurada).
 
-Listo: entra a `https://TU-SITIO.vercel.app/admin`, inicia sesión con GitHub y publica. Cada noticia guardada se publica sola en ~1 minuto.
+Listo: entra a `https://websinole.vercel.app/admin`, inicia sesión con GitHub y publica. Cada noticia guardada se publica sola en ~1 minuto.
 Solo pueden entrar personas con permiso de escritura en el repositorio.
 
 ## Desarrollo local (opcional)
