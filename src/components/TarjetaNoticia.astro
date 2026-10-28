@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { noticia: CollectionEntry<'noticias'> }
+const { noticia } = Astro.props;
+const { titulo, fecha, imagen, resumen, categoria } = noticia.data;
+const fechaTxt = fecha.toLocaleDateString('es-PE', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+<article class="revelar group flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm transition-shadow hover:shadow-lg">
+  <a href={`/noticias/${noticia.id}`} class="block aspect-[16/9] overflow-hidden bg-verde-50">
+    {imagen
+      ? <img src={imagen} alt="" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+      : <div class="grid h-full place-items-center"><img src="/logos/sinole.jpg" alt="" class="h-20 w-20 rounded-full opacity-70" /></div>}
+  </a>
+  <div class="flex flex-1 flex-col p-5">
+    <p class="text-xs font-semibold uppercase tracking-wider text-rojo-700">{categoria} · <time datetime={fecha.toISOString()}>{fechaTxt}</time></p>
+    <h3 class="mt-2 font-serif text-xl font-bold leading-snug text-stone-900">
+      <a href={`/noticias/${noticia.id}`} class="hover:text-verde-700">{titulo}</a>
+    </h3>
+    <p class="mt-2 flex-1 text-stone-600">{resumen}</p>
+    <a href={`/noticias/${noticia.id}`} class="mt-4 inline-flex items-center gap-1 font-semibold text-verde-700 hover:underline">
+      Leer más <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+    </a>
+  </div>
+</article>

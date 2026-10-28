@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import TarjetaNoticia from '../../components/TarjetaNoticia.astro';
+
+const noticias = (await getCollection('noticias')).sort((a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf());
+---
+<Base titulo="Noticias" descripcion="Comunicados y actualizaciones oficiales de SINOLE.">
+  <section class="bg-verde-900 py-14 text-white">
+    <div class="mx-auto max-w-6xl px-4">
+      <h1 class="aparecer font-serif text-4xl font-bold md:text-5xl">Noticias y comunicados</h1>
+      <p class="mt-3 text-lg text-verde-100">Información oficial del sindicato para afiliados y la opinión pública.</p>
+    </div>
+  </section>
+  <section class="mx-auto max-w-6xl px-4 py-12">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {noticias.map((n) => <TarjetaNoticia noticia={n} />)}
+    </div>
+  </section>
+</Base>

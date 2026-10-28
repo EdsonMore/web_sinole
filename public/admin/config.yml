@@ -1,0 +1,29 @@
+backend:
+  name: github
+  repo: USUARIO_GITHUB/web_sinole # CAMBIAR: tu-usuario/nombre-del-repositorio
+  branch: main
+  base_url: https://web-sinole.vercel.app # CAMBIAR: la URL de tu sitio en Vercel
+  auth_endpoint: api/auth
+
+# Para editar en tu PC sin GitHub: ejecutar `npx decap-server` junto a `npm run dev`
+local_backend: true
+
+locale: es
+media_folder: public/images/noticias
+public_folder: /images/noticias
+
+collections:
+  - name: noticias
+    label: Noticias
+    label_singular: Noticia
+    folder: src/content/noticias
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: [fecha, titulo]
+    fields:
+      - { label: Título, name: titulo, widget: string }
+      - { label: Fecha, name: fecha, widget: datetime, date_format: DD/MM/YYYY, time_format: false, format: YYYY-MM-DD }
+      - { label: Categoría, name: categoria, widget: select, options: [Comunicado, Petroperú, Talara, Oleoducto, FEDUNPE, Convocatoria], default: Comunicado }
+      - { label: Imagen de portada, name: imagen, widget: image, required: false }
+      - { label: Resumen (1-2 líneas), name: resumen, widget: text }
+      - { label: Contenido, name: body, widget: markdown }
