@@ -1,11 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE } from '../site';
+import { existsSync, readdirSync } from 'node:fs';
+import { SITE, FEDUNPE } from '../site';
+
+// Se leen al compilar: basta subir archivos a public/ y volver a desplegar.
+const logoPetroperu = ['svg', 'png', 'jpg', 'webp'].map((e) => `/logos/petroperu.${e}`).find((f) => existsSync(`public${f}`));
+const galeria = existsSync('public/galeria')
+  ? readdirSync('public/galeria').filter((f) => /\.(jpe?g|png|webp|mp4|webm)$/i.test(f)).sort()
+  : [];
 
 const hitos = [
   { anio: '1976', texto: `Se funda el sindicato el ${SITE.fundacion} (R.D. 005-ORNT).` },
   { anio: 'Hoy', texto: 'Representamos a los trabajadores de Petroperú – Operaciones Oleoducto desde Piura.' },
-  { anio: 'FEDUNPE', texto: 'Integramos la Federación de Unidad Nacional del Petróleo y Energía.' },
+  { anio: FEDUNPE.sigla, texto: `Integramos la ${FEDUNPE.nombre} junto a ${FEDUNPE.sindicatos.filter((s) => s.sigla !== SITE.nombre).map((s) => `${s.sigla} (${s.ciudad})`).join(', ')}.` },
 ];
 const valores = ['Unidad', 'Transparencia', 'Solidaridad', 'Defensa del patrimonio nacional', 'Seguridad en el trabajo', 'Respeto'];
 ---
@@ -33,6 +40,33 @@ const valores = ['Unidad', 'Transparencia', 'Solidaridad', 'Defensa del patrimon
       <p class="mt-4 text-sm text-stone-500">RUC {SITE.ruc} · {SITE.direccion}</p>
     </div>
   </section>
+
+  <section class="bg-verde-800 py-14 text-white">
+    <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 md:grid-cols-[1fr_1.6fr]">
+      {logoPetroperu
+        ? <img src={logoPetroperu} alt="Logo de Petroperú" class="revelar mx-auto w-56 rounded-lg bg-white p-4" />
+        : <p class="revelar text-center font-serif text-5xl font-black tracking-tight md:text-6xl">PETRO<span class="text-rojo-600">PERÚ</span></p>}
+      <div class="revelar">
+        <h2 class="font-serif text-3xl font-bold">Sindicato de Trabajadores de Petroperú</h2>
+        <p class="mt-3 text-lg text-verde-100">
+          Somos trabajadores de Petróleos del Perú – Operaciones Oleoducto. Junto a {FEDUNPE.sigla} defendemos a la empresa
+          estatal y a quienes la hacen funcionar cada día.
+        </p>
+        <a href={SITE.petroperu} target="_blank" rel="noopener" class="mt-5 inline-block rounded-lg bg-white px-5 py-2.5 font-semibold text-verde-900 hover:bg-verde-50">Visitar petroperu.com.pe ↗</a>
+      </div>
+    </div>
+  </section>
+
+  {galeria.length > 0 && (
+    <section class="mx-auto max-w-6xl px-4 py-16">
+      <h2 class="text-center font-serif text-3xl font-bold text-verde-900">Galería institucional</h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {galeria.map((f) => /\.(mp4|webm)$/i.test(f)
+          ? <video src={`/galeria/${f}`} controls muted playsinline preload="metadata" class="aspect-video w-full rounded-xl bg-black shadow-sm"></video>
+          : <img src={`/galeria/${f}`} alt="Foto institucional de SINOLE" loading="lazy" class="aspect-video w-full rounded-xl object-cover shadow-sm" />)}
+      </div>
+    </section>
+  )}
 
   <section class="border-y border-stone-200 bg-white py-16">
     <div class="mx-auto grid max-w-6xl gap-6 px-4 md:grid-cols-2">

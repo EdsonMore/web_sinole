@@ -7,8 +7,27 @@ export const SITE = {
   fundacion: '20 de diciembre de 1976',
   direccion: 'Jr. Junín 1130, Piura – Perú',
   email: 'contacto@sinole.pe', // PLACEHOLDER: reemplazar por el correo oficial
-  telefono: '+51 900 000 000', // PLACEHOLDER: reemplazar por el número oficial
+  petroperu: 'https://www.petroperu.com.pe/',
 };
+
+// Mismos números para SINOLE y FEDUNPE.
+export const CONTACTOS = [
+  { nombre: 'Cielo Chávez Sánchez', cargo: 'Secretaria', telefono: '+51 947 765 605' },
+  { nombre: 'Luis Camino Quinde', cargo: 'Secretario General', telefono: '+51 901 966 461' },
+];
+
+export const FEDUNPE = {
+  sigla: 'FEDUNPE',
+  nombre: 'Federación de Unidad Nacional del Petróleo y Energía',
+  sindicatos: [
+    { sigla: 'SINUTREAPP', ciudad: 'Talara' },
+    { sigla: 'SINAPROPP', ciudad: 'Lima' },
+    { sigla: 'SUTOS', ciudad: 'Iquitos' },
+    { sigla: 'SINOLE', ciudad: 'Piura' },
+  ],
+};
+
+export const whatsapp = (telefono: string) => `https://wa.me/${telefono.replace(/\D/g, '')}`;
 
 export const SOCIAL = [
   { nombre: 'Facebook', url: 'https://www.facebook.com/sindicato.oleoducto', usuario: 'Sindicato Oleoducto' },

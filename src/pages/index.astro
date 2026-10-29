@@ -3,7 +3,11 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import TarjetaNoticia from '../components/TarjetaNoticia.astro';
 import Icono from '../components/Icono.astro';
-import { SITE, SOCIAL } from '../site';
+import { existsSync } from 'node:fs';
+import { SITE, SOCIAL, FEDUNPE } from '../site';
+
+// Se evalúa al compilar: sube public/video/perfil.mp4 y vuelve a desplegar.
+const hayVideo = existsSync('public/video/perfil.mp4');
 
 const ultimas = (await getCollection('noticias'))
   .sort((a, b) => Number(b.data.fijada) - Number(a.data.fijada) || b.data.fecha.valueOf() - a.data.fecha.valueOf())
@@ -18,7 +22,7 @@ const pilares = [
 
 const preguntas = [
   { p: '¿Qué es SINOLE?', r: `Es el ${SITE.nombreLargo}, fundado el ${SITE.fundacion}. Representa a los trabajadores de las operaciones del Oleoducto Norperuano.` },
-  { p: '¿Qué es FEDUNPE?', r: 'La Federación de Unidad Nacional del Petróleo y Energía, que agrupa a sindicatos del sector para defender en conjunto los derechos de los trabajadores y la industria energética nacional.' },
+  { p: '¿Qué es FEDUNPE?', r: `La ${FEDUNPE.nombre}, integrada por ${FEDUNPE.sindicatos.map((s) => `${s.sigla} (${s.ciudad})`).join(', ')}, que defienden en conjunto los derechos de los trabajadores de Petroperú y la industria energética nacional.` },
   { p: '¿Cómo puedo afiliarme o hacer una consulta?', r: `Acércate a nuestro local en ${SITE.direccion}, escríbenos desde la página de Contacto o envíanos un mensaje por nuestras redes sociales.` },
   { p: '¿Dónde me entero de los comunicados oficiales?', r: 'En la sección Noticias de esta web y en nuestras cuentas oficiales de Facebook, TikTok e Instagram.' },
 ];
@@ -42,7 +46,9 @@ const preguntas = [
         <p class="mt-8 font-serif text-xl italic text-verde-100">“{SITE.lema}”</p>
       </div>
       <div class="aparecer mx-auto [animation-delay:150ms]">
-        <img src="/logos/sinole.jpg" alt="Escudo de SINOLE" width="380" height="380" class="w-64 rounded-full bg-white p-2 shadow-2xl ring-8 ring-white/10 md:w-[360px]" />
+        {hayVideo
+          ? <video src="/video/perfil.mp4" poster="/logos/sinole.jpg" controls muted playsinline preload="metadata" class="w-full max-w-md rounded-xl shadow-2xl ring-8 ring-white/10"></video>
+          : <img src="/logos/sinole.jpg" alt="Escudo de SINOLE" width="380" height="380" class="w-64 rounded-full bg-white p-2 shadow-2xl ring-8 ring-white/10 md:w-[360px]" />}
       </div>
     </div>
   </section>
@@ -116,8 +122,15 @@ const preguntas = [
   <section class="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-14 text-center md:flex-row md:text-left">
     <img src="/logos/fedunpe.jpg" alt="Logo FEDUNPE" width="200" height="133" class="w-48 rounded-lg bg-white p-2 shadow" />
     <div>
-      <h2 class="font-serif text-2xl font-bold text-verde-900">Miembros de FEDUNPE</h2>
-      <p class="mt-2 max-w-2xl text-stone-600">Federación de Unidad Nacional del Petróleo y Energía: la unión de los trabajadores petroleros del Perú.</p>
+      <h2 class="font-serif text-2xl font-bold text-verde-900">Miembros de {FEDUNPE.sigla}</h2>
+      <p class="mt-2 max-w-2xl text-stone-600">{FEDUNPE.sigla} – {FEDUNPE.nombre}: la unión de los trabajadores petroleros del Perú, integrada por 4 sindicatos.</p>
+      <ul class="mt-4 flex flex-wrap justify-center gap-2 md:justify-start">
+        {FEDUNPE.sindicatos.map((s) => (
+          <li class:list={['rounded-full border px-4 py-1.5 text-sm font-semibold', s.sigla === SITE.nombre ? 'border-rojo-600 bg-rojo-600 text-white' : 'border-verde-600 bg-white text-verde-800']}>
+            {s.sigla} <span class="font-normal opacity-80">· {s.ciudad}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </Base>

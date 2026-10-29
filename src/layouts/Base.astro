@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import Icono from '../components/Icono.astro';
-import { SITE, SOCIAL } from '../site';
+import { SITE, SOCIAL, CONTACTOS, FEDUNPE, whatsapp } from '../site';
 
 interface Props { titulo?: string; descripcion?: string }
 const { titulo, descripcion = `${SITE.nombreLargo}. ${SITE.lema}.` } = Astro.props;
@@ -35,7 +35,7 @@ const activo = (href: string) => (href === '/' ? ruta === '/' : ruta.startsWith(
     <div class="bg-verde-900 text-xs text-verde-100">
       <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-1.5">
         <span class="truncate">RUC {SITE.ruc} · {SITE.direccion}</span>
-        <span class="hidden italic sm:inline">“{SITE.lema}”</span>
+        <a href={whatsapp(CONTACTOS[0].telefono)} target="_blank" rel="noopener" class="shrink-0 hover:text-white hover:underline">WhatsApp {CONTACTOS[0].telefono}</a>
       </div>
     </div>
 
@@ -103,6 +103,8 @@ const activo = (href: string) => (href === '/' ? ruta === '/' : ruta.startsWith(
           </div>
           <p class="mt-4 text-sm">{SITE.nombreLargo}</p>
           <p class="mt-1 text-sm italic text-verde-100/80">“{SITE.lema}”</p>
+          <p class="mt-3 text-sm">Miembro de {FEDUNPE.sigla} – {FEDUNPE.nombre}: {FEDUNPE.sindicatos.map((s) => `${s.sigla} (${s.ciudad})`).join(', ')}.</p>
+          <a href={SITE.petroperu} target="_blank" rel="noopener" class="mt-3 inline-block text-sm font-semibold text-white underline">Trabajadores de Petroperú – petroperu.com.pe ↗</a>
         </div>
         <div>
           <h2 class="font-serif text-lg font-semibold text-white">Enlaces</h2>
@@ -118,6 +120,11 @@ const activo = (href: string) => (href === '/' ? ruta === '/' : ruta.startsWith(
             ))}
           </ul>
           <p class="mt-4 text-sm">{SITE.direccion}</p>
+          <ul class="mt-3 space-y-1 text-sm">
+            {CONTACTOS.map((c) => (
+              <li><a href={whatsapp(c.telefono)} target="_blank" rel="noopener" class="hover:text-white hover:underline">{c.cargo}: {c.nombre} · {c.telefono}</a></li>
+            ))}
+          </ul>
         </div>
       </div>
       <div class="border-t border-white/10 py-4 text-center text-xs text-verde-100/70">
